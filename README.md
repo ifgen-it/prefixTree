@@ -1,5 +1,7 @@
 # prefixTree
 
+[![Codeship Status for ifgen-it/prefixTree](https://app.codeship.com/projects/2a4ef3d0-6ece-0137-a84d-2680a1ee510c/status?branch=master)](https://app.codeship.com/projects/347438)
+
 Задание
 
 Есть большой текстовый файл, в котором хранятся различные слова,
