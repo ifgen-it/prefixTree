@@ -53,7 +53,7 @@ class Node {
 
             return;
         }
-        
+
         //  recursive call
         String rest = str.substring(1, str.length());
         child.addWord(rest, pos);
@@ -138,20 +138,27 @@ public class WordIndex {
     public void loadFile(String filename) {
 
         ArrayList<String> inStr = new ArrayList<>();
-        System.out.println("begin loading: " + filename);
+        System.out.println("Begin loading: " + filename);
         try {
             //String path = "file.txt";
             String path = filename;
 
             FileReader fr = new FileReader(path);
             Scanner sc = new Scanner(fr);
-            System.out.println("begin scanning..");
+            System.out.println("File loaded");
 
             // System.out.println("input:");
             while (true) {
                 if (sc.hasNext()) {
                     String temp = sc.next().trim();
-                    inStr.add(temp);
+                    //System.out.println("temp word: " + temp);
+                    byte[] bText = temp.getBytes();
+
+                    String value = new String(bText, "UTF-8");
+                    //System.out.println("value word: " + value);
+                    //System.out.println("-----------------");
+
+                    inStr.add(value);
                 } else {
                     break;
                 }
@@ -173,6 +180,7 @@ public class WordIndex {
             // System.out.println((i+1) + " : " + str);
             root.addWord(str, i + 1);
         }
+        System.out.println("Trie was built");
 
         //System.out.println();
         //root.print();
@@ -182,9 +190,14 @@ public class WordIndex {
     }
 
     public Set<Integer> getIndexes4Word(String searchWord) {
-        System.out.println("in getIndexes4Word");
+        System.out.println("--> getIndexes4Word");
+        System.out.println("Search word: " + searchWord);
         ArrayList<Integer> result = root.getIndexes4Word(searchWord);
-        System.out.println(result);
+        System.out.println("Result: " + result);
+
+        if (result == null) {
+            return null;
+        }
         Set<Integer> setResult = new TreeSet<>(result);
 
         return setResult;
